@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageid' => 'login'])
+@section('pagetitle', 'Login')
 
 @section('content')
 <div class="container">

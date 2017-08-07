@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageid' => 'home'])
+@section('pagetitle', 'Home')
 
 @section('content')
 <div class="container-fluid">

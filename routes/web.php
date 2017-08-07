@@ -16,17 +16,8 @@ use Carbon\Carbon;
 
 Route::get('/', function () {
 
-    $cards = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/expansions/1469/singles');
-
-    foreach ($cards->single as $c){
-        dd($c);
-
-
-
-
-    }
-    return view('welcome');
-});
+    return view('auth.login');
+})->middleware('guest');
 
 Auth::routes();
 
@@ -34,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about-me', 'HomeController@aboutMe')->name('about-me');
 
 Route::get('/search', 'SearchController@index')->middleware('auth');
+Route::post('/searching', 'SearchController@search')->middleware('auth');
 
 Route::get('/trade', 'TradeController@index')->middleware('auth');
 
