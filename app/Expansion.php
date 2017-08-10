@@ -21,10 +21,10 @@ class Expansion extends Model
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+
     ];
 
     public function cards(){
-        return $this->belongsToMany(Card::class);
+        return $this->hasMany(Card::class, 'expansion');
     }
 }

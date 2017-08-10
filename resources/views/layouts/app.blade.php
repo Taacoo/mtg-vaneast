@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="//cdn.jsdelivr.net/npm/keyrune@latest/css/keyrune.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset('css/vaneast.css') }}"
 
 </head>
@@ -48,7 +49,7 @@
                             <li ><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li @if($pageid == 'search') class="active" @endif><a href="{{ url('search') }}">Zoek</a></li>
+                            <li @if($pageid == 'search') class="active" @endif><a href="{{ url('search') }}">Search</a></li>
                             <li @if($pageid == 'trade') class="active" @endif><a href="#">Trade</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

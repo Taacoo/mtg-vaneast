@@ -35,7 +35,7 @@ class AddCardsTableExpansionTableInTradeTable extends Migration
                 $table->string('name', 150)->nullable();
                 $table->string('img_path', 255)->nullable();
                 $table->string('rarity', 50)->nullable();
-                $table->string('expansion_id', 10)->nullable();
+                $table->string('expansion_id', 10)->nullable()->unsigned();
                 $table->timestamps();
             });
         }

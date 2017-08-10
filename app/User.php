@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function trades(){
         return $this->belongsToMany(Trade::class);
     }
+
+    public static function getPrices($mcm_id){
+
+    }
 }

@@ -1,10 +1,46 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 60px;
-    line-height: 60px; /* Vertically center the text there */
-    background-color: #f5f5f5;
-    text-align: center;
+    background-color: #e3e3e3;
+}
+
+.ss{
+    font-size: 16px;
+}
+.Token{
+
+}
+.Land{
+
+}
+.Common{
+    color: #000;
+}
+.Uncommon{
+    color: rgb(173, 173, 173);
+}
+.Rare{
+    color: #aa9811;
+}
+.Mythic{
+    color: #aa5a02;
+}
+.Masterpiece{
+
+}
+.Special{
+
 }

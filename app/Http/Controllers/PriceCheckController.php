@@ -46,7 +46,7 @@ class PriceCheckController extends Controller
          * games
          * ~/games/:idGame/expansions               Return all expansions for given :idGame (1 - MTG)
          * ~/expansions/:idExpansion/singles        Return all cards released for given :idExpansion (1469 - Born of the Gods) -- No Price Detail
-         * ~/products/:idProduct                    Return details for given :idProduct (266207 - The Tyrant) -- With Price Details
+         * ~/products/:idProduct                    Return details for given :hezeidProduct (266207 - The Tyrant) -- With Price Details
          */
 
         $method             = "GET";
