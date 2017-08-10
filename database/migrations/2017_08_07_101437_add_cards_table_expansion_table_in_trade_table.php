@@ -20,7 +20,7 @@ class AddCardsTableExpansionTableInTradeTable extends Migration
                 $table->string('name', 150)->default('expansion')->nullable();
                 $table->string('abbreviation', 20)->default('exp')->nullable();
                 $table->integer('icon', false)->length(6)->nullable()->unsigned();
-                $table->integer('mcm_expansion_id', false)->length(6)->nullable()->unsigned();
+                $table->integer('mcm_expansion_id', false)->length(6)->nullable();
                 $table->string('release_date', 30)->default('1900-01-01');
                 $table->timestamps();
             });
@@ -30,8 +30,8 @@ class AddCardsTableExpansionTableInTradeTable extends Migration
 
             Schema::create('cards', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('mcm_product_id', false)->length(10)->nullable()->unsigned();
-                $table->integer('mcm_meta_id', false)->length(10)->nullable()->unsigned();
+                $table->integer('mcm_product_id', false)->length(10)->nullable();
+                $table->integer('mcm_meta_id', false)->length(10)->nullable();
                 $table->string('name', 150)->nullable();
                 $table->string('img_path', 255)->nullable();
                 $table->string('rarity', 50)->nullable();
@@ -44,8 +44,8 @@ class AddCardsTableExpansionTableInTradeTable extends Migration
 
             Schema::create('in_trade', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('trade_id', false)->length(10)->nullable()->unsigned();
-                $table->integer('card_id', false)->length(10)->nullable()->unsigned();
+                $table->integer('trade_id', false)->length(10)->nullable();
+                $table->integer('card_id', false)->length(10)->nullable();
                 $table->decimal('price_sell', 8, 2)->nullable();
                 $table->decimal('price_low', 8, 2)->nullable();
                 $table->decimal('price_lowfoil', 8, 2)->nullable();
