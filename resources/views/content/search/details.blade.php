@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6  col-xs-8">
-                                                <img style="width: 220px;" class="center-block" src="https://magiccardmarket.eu{!! ltrim($card->img_path, '.') !!}" alt="{{ $card->name }}" />
+                                                <img style="width: 200px;" class="center-block" src="https://magiccardmarket.eu{!! ltrim($card->img_path, '.') !!}" alt="{{ $card->name }}" />
                                             </div>
                                             <div class="col-md-6 col-xs-4">
                                                 <div class="row"><span>Sell: &euro; {{ number_format($prices['sell'], 2,',', '.') }}</span></div>
