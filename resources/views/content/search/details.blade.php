@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="result">
-                                    @if(isset($card_details) && isset($prices) && isset($card))
+                                    @if(isset($prices) && isset($card))
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3 class="text-center">{{ $card->name }}</h3>

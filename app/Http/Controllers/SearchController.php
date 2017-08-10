@@ -31,14 +31,15 @@ class SearchController extends Controller
     public function specific($id){
         $card = Card::find($id);
 
-        $ch = curl_init();
+/*        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://api.deckbrew.com/mtg/cards?name=". str_replace(' ', '+', $card->name));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $output = curl_exec($ch);
         curl_close($ch);
 
         $card_details = json_decode($output);
-        $card_details = $card_details[0];
+        dd($card_details);
+        $card_details = $card_details[0];*/
 
         $price = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$card->mcm_product_id);
 
@@ -51,6 +52,6 @@ class SearchController extends Controller
             'trend' => $price->product->priceGuide->TREND,
         ];
 
-        return view('content.search.details', compact('card_details', 'card', 'prices'));
+        return view('content.search.details', compact('card', 'prices'));
     }
 }
