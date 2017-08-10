@@ -33,10 +33,10 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 col-xs-6">
+                                            <div class="col-md-6  col-xs-8">
                                                 <img class="center-block" src="https://magiccardmarket.eu{!! ltrim($card->img_path, '.') !!}" alt="{{ $card->name }}" />
                                             </div>
-                                            <div class="col-md-6 col-xs-6">
+                                            <div class="col-md-6 col-xs-4">
                                                 <div class="row"><span>Sell: &euro; {{ number_format($prices['sell'], 2,',', '.') }}</span></div>
                                                 <div class="row"><span>Low: &euro; {{ number_format($prices['low'], 2,',', '.') }}</span></div>
                                                 <div class="row"><span>Low EX: &euro; {{ number_format($prices['lowex'], 2,',', '.') }}</span></div>
