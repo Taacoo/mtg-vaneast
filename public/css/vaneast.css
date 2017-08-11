@@ -17,8 +17,52 @@ body {
     background-color: #e3e3e3;
 }
 
+.navbar-brand{
+    width: 150px;
+    height: 60px;
+    background: url(../img/vaneast-small.png) no-repeat center center transparent;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+    .navbar-brand {
+        width: 150px;
+        height: 60px;
+        background: url('../img/vaneast-big.png') no-repeat center center transparent;
+        background-size: 80px 60px;
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+.navbar-toggle{
+    position: relative;
+    float: right;
+    margin-right: 15px;
+    padding: 9px 10px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    border-radius: 0;
+}
+.navbar-trade{
+    background: url('../img/playing_cards_25.png') no-repeat;
+    display: block;  /* may not need this, but I've found I do */
+    height: 50px;
+    width: 50px;
+}
+
+
 .ss{
     font-size: 16px;
+}
+.card-img{
+    max-width: 200px;
 }
 .Token{
 
@@ -43,4 +87,10 @@ body {
 }
 .Special{
 
+}
+.red{
+    color: red;
+}
+.green{
+    color: green;
 }

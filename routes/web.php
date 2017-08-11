@@ -56,5 +56,7 @@ Route::post('/searching', 'SearchController@search')->middleware('auth');
 Route::get('/card/{id}', 'SearchController@specific')->middleware('auth');
 
 Route::get('/trade', 'TradeController@index')->middleware('auth');
+Route::post('/trade/create', 'TradeController@createTrade')->middleware('auth');
+Route::get('/trade/{id}', 'TradeController@tradeDetails')->middleware('auth');
 
 Route::get('/request', 'PriceCheckController@request')->middleware('auth');

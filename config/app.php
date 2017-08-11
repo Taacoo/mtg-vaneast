@@ -227,5 +227,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'MCM' => App\MCM::class,
+        'Trade' => App\Trade::class,
     ],
 ];

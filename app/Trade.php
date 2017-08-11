@@ -23,7 +23,48 @@ class Trade extends Model
     protected $hidden = [
     ];
 
-    public function users(){
-        return $this->belongsToMany(User::class);
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function intrades(){
+        return $this->hasMany(Intrade::class);
+    }
+
+    public static function getMyTradeValue($id){
+        $inTrade = Intrade::where('trade_id', $id)->where('locked_in', 1)->where('belongs_to', 1)->get();
+        $value = 0;
+
+        foreach($inTrade as $i){
+            $value = $value + $i->price_avg;
+        }
+
+        return '&euro; ' . number_format($value, 2,',','.');
+    }
+
+    public static function getPartnerTradeValue($id){
+        $inTrade = Intrade::where('trade_id', $id)->where('locked_in', 1)->where('belongs_to', 0)->get();
+        $value = 0;
+
+        foreach($inTrade as $i){
+            $value = $value + $i->price_avg;
+        }
+
+        return '&euro; ' . number_format($value, 2,',','.');
+    }
+
+    public static function getTradeValue($id){
+        $inTrade = Intrade::where('trade_id', $id)->where('locked_in', 1)->get();
+        $value = 0;
+
+        foreach($inTrade as $i){
+            if($i->belongs_to == 1){
+                $value = $value + $i->price_avg;
+                continue;
+            }
+            $value = $value - $i->price_avg;
+        }
+
+        return $value;
     }
 }

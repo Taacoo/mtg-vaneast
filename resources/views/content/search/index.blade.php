@@ -36,7 +36,6 @@
                                     @if(isset($result))
                                         @foreach($result as $r)
                                             <span><a href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->abbreviation) }}" ></i></a></span></br>
-
                                         @endforeach
                                     @endif
                                 </div>
