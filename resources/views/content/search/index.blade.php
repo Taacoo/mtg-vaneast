@@ -35,7 +35,7 @@
                                 <div class="result">
                                     @if(isset($result))
                                         @foreach($result as $r)
-                                            <span><a href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->abbreviation) }}" ></i></a></span></br>
+                                            <span><a class="searched" data-image="https://magiccardmarket.eu{!! ltrim($r->img_path, '.') !!}" href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->abbreviation) }}" ></i></a></span></br>
                                         @endforeach
                                     @endif
                                 </div>
@@ -50,6 +50,16 @@
 
 @section('scripts')
     <script type="text/javascript">
+        $(document).ready(function(){
+            $(".searched").mouseenter(function(){
+                var image_name=$(this).data('image');
+                var imageTag='<div style="position:absolute; z-index: 1; left: 150px;">'+'<img src="'+image_name+'" alt="image" height="250" />'+'</div>';
+                $(this).parent('span').append(imageTag);
+            });
 
+            $(".searched").mouseleave(function(){
+                $(this).parent('span').children('div').remove();
+            });
+        });
     </script>
 @endsection
