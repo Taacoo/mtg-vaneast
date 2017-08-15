@@ -39,16 +39,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($trades as $t)
-                                        <tr>
-                                            <td><a href="{{ url('trade', $t->id) }}">{{ $t->name }}</a></td>
-                                            <td>{{ count($t->intrades) }}</td>
-                                            <td>{{ Trade::getMyTradeValue($t->id) }}</td>
-                                            <td>{{ Trade::getPartnerTradeValue($t->id) }}</td>
-                                            <td class="{{ (Trade::getTradeValue($t->id) >= 0) ? 'green' : 'red' }}">&euro; {{ number_format(Trade::getTradeValue($t->id), 2,',','.') }}</td>
-                                        </tr>
-                                    @endforeach
-
+                                        @forelse($trades as $t)
+                                            <tr>
+                                                <td><a href="{{ url('trade', $t->id) }}">{{ $t->name }}</a></td>
+                                                <td>{{ count($t->intrades) }}</td>
+                                                <td>{{ Trade::getMyTradeValue($t->id) }}</td>
+                                                <td>{{ Trade::getPartnerTradeValue($t->id) }}</td>
+                                                <td class="{{ (Trade::getTradeValue($t->id) >= 0) ? 'green' : 'red' }}">&euro; {{ number_format(Trade::getTradeValue($t->id), 2,',','.') }}</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5">No trade started</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

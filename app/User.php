@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function trade(){
+    public function trades(){
         return $this->hasMany(Trade::class);
     }
 

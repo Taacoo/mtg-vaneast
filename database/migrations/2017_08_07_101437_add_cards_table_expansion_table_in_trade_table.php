@@ -51,7 +51,6 @@ class AddCardsTableExpansionTableInTradeTable extends Migration
                 $table->decimal('price_lowfoil', 8, 2)->nullable();
                 $table->decimal('price_avg', 8, 2)->nullable();
                 $table->decimal('price_trend', 8, 2)->nullable();
-                $table->integer('locked_in', false)->length(1)->default('0');
                 $table->timestamps();
             });
         }

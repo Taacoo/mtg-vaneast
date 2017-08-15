@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class PriceCheckController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+
     /**
      *
      */

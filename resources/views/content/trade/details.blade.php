@@ -1,4 +1,4 @@
-@extends('layouts.app', ['pageid' => 'search'])
+@extends('layouts.app', ['pageid' => 'trade'])
 @section('pagetitle', 'Search')
 
 @section('content')
@@ -8,6 +8,13 @@
                 <div class="panel panel-default">
 
                     <div class="panel-heading">Trade Details - {{ $trade->name }}</div>
+                    @if(Session::has('success'))
+                        <div class="form-group">
+                            <div class="alert alert-success">
+                                <span>{!! session('success') !!}</span>
+                            </div>
+                        </div>
+                    @endif
                     <div class="panel-body">
                         <a style="float: left;" class="btn btn-default" href="{{ url('trade') }}"><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;Back</a>
                         <h4 style="float:right" class="{{ (Trade::getTradeValue($trade->id) >= 0) ? 'green' : 'red' }}">&euro; {{ number_format(Trade::getTradeValue($trade->id), 2,',','.') }}</h4>
@@ -22,6 +29,7 @@
                                         <tr>
                                             <th>Card</th>
                                             <th>Value</th>
+                                            <th>Remove</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -29,13 +37,15 @@
                                             @if($i->belongs_to == 1)
                                                 <tr>
                                                     <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->abbreviation) }}" ></i></td>
-                                                    <td colspan="1">{{ $i->price_avg }}</td>
+                                                    <td colspan="1">&euro; {{ number_format($i->price_avg, 2,',', '.') }}</td>
+                                                    <td colspan="1"><a href="{{ action('TradeController@removeFromTrade', ['id' => $i->id]) }}" id="remove" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                                 </tr>
                                             @endif
                                         @endforeach
                                             <tr>
                                                 <td><b>Total:</b></td>
                                                 <td>{{ Trade::getMyTradeValue($trade->id) }}</td>
+                                                <td>&nbsp;</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -47,6 +57,7 @@
                                         <tr>
                                             <th>Card</th>
                                             <th>Value</th>
+                                            <th>Remove</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -54,13 +65,15 @@
                                             @if($i->belongs_to != 1)
                                                 <tr>
                                                     <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->abbreviation) }}" ></i></td>
-                                                    <td colspan="1">{{ $i->price_avg }}</td>
+                                                    <td colspan="1">&euro; {{ number_format($i->price_avg, 2,',', '.') }}</td>
+                                                    <td colspan="1"><a href="{{ action('TradeController@removeFromTrade', ['id' => $i->id]) }}" id="remove" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                                 </tr>
                                             @endif
                                         @endforeach
                                         <tr>
                                             <td><b>Total:</b></td>
                                             <td>{{ Trade::getPartnerTradeValue($trade->id) }}</td>
+                                            <td>&nbsp;</td>
                                         </tr>
                                         </tbody>
                                     </table>

@@ -32,7 +32,7 @@ class Trade extends Model
     }
 
     public static function getMyTradeValue($id){
-        $inTrade = Intrade::where('trade_id', $id)->where('locked_in', 1)->where('belongs_to', 1)->get();
+        $inTrade = Intrade::where('trade_id', $id)->where('belongs_to', 1)->get();
         $value = 0;
 
         foreach($inTrade as $i){
@@ -43,7 +43,7 @@ class Trade extends Model
     }
 
     public static function getPartnerTradeValue($id){
-        $inTrade = Intrade::where('trade_id', $id)->where('locked_in', 1)->where('belongs_to', 0)->get();
+        $inTrade = Intrade::where('trade_id', $id)->where('belongs_to', 0)->get();
         $value = 0;
 
         foreach($inTrade as $i){
@@ -54,7 +54,7 @@ class Trade extends Model
     }
 
     public static function getTradeValue($id){
-        $inTrade = Intrade::where('trade_id', $id)->where('locked_in', 1)->get();
+        $inTrade = Intrade::where('trade_id', $id)->get();
         $value = 0;
 
         foreach($inTrade as $i){

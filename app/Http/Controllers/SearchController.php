@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\MCM;
 use Illuminate\Http\Request;
 use App\Card;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
-    public function index(){
+    public function __construct(){
+        $this->middleware('auth');
+    }
 
+    public function index(){
         return view('content.search.index');
     }
 
@@ -30,6 +34,7 @@ class SearchController extends Controller
 
     public function specific($id){
         $card = Card::find($id);
+        $trades = Auth::user()->trades;
 
 /*        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://api.deckbrew.com/mtg/cards?name=". str_replace(' ', '+', $card->name));
@@ -52,6 +57,6 @@ class SearchController extends Controller
             'trend' => $price->product->priceGuide->TREND,
         ];
 
-        return view('content.search.details', compact('card', 'prices'));
+        return view('content.search.details', compact('card', 'prices', 'trades'));
     }
 }
