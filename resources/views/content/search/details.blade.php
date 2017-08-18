@@ -52,24 +52,52 @@
                             </div>
                                <br/>
                             <div class="row">
-                               <div class="col-md-12">
-                                   @if(count($trades) == 0)
-                                       <p>No trades started. Start one <a href="{{ action('TradeController@index') }}">here</a></p>
-                                   @else
-                                       <select class="selectpicker" data-width="75%">
-                                           @foreach($trades as $t)
-                                               <option value="{{ $t->id }}">{{ $t->name }}</option>
-                                           @endforeach
-                                       </select>
-                                   @endif
-
-                               </div>
+                                <div class="col-md-12" style="display: inline-block;">
+                                    <div class="col-md-5"  style="display: inline-block;">
+                                        @if(count($trades) == 0)
+                                            <p>No trades started. Start one <a href="{{ action('TradeController@index') }}">here</a></p>
+                                        @else
+                                            <select class="selectpicker" id="tradePicker">
+                                                @foreach($trades as $t)
+                                                    <option value="{{ $t->id }}">{{ $t->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        @endif
+                                    </div>
+                                    @if(count($trades) == 0)
+                                    @else
+                                        <div class="col-md-2" style="display: inline-block;">
+                                            <button type="submit" id="me_button" class="btn btn-success">Add to me</button>
+                                        </div>
+                                        <div class="col-md-2" style="display: inline-block;">
+                                            <button type="submit" id="partner_button" class="btn btn-warning">Add to Partner</button>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                               <br/>
+                            <br/>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button type="submit" id="me_button" class="btn btn-success">Add to me</button>
-                                    <button type="submit" id="partner_button" class="btn btn-warning">Add to Partner</button>
+                                    <div class="col-md-5"  style="display: inline-block;">
+                                        @if(count($wishlists) == 0)
+                                            <p>No wishlist created. Create one <a href="{{ action('WishlistController@index') }}">here</a></p>
+                                        @else
+                                            <select class="selectpicker" id="wishlistPicker">
+                                                @foreach($wishlists as $w)
+                                                    <option value="{{ $w->id }}">{{ $w->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        @endif
+                                    </div>
+                                    @if(count($wishlists) == 0)
+                                    @else
+                                        <div class="col-md-2" style="display: inline-block;">
+                                            <input type="number" class="form-control" id="wishlist_quantity" name="quantity" value="1" min="0" max="99"/>
+                                        </div>
+                                        <div class="col-md-1" style="display: inline-block;">
+                                            <button type="submit" id="wishlist_button" class="btn btn-info">Add to Wishlist</button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                                 <br/>
@@ -97,22 +125,29 @@
         });
 
         $('#me_button').on('click', function(){
-            var selected = $('.selectpicker').find("option:selected").val();
+            var selected = $('#tradePicker').find("option:selected").val();
             var choice = 'me';
             var avg = {{ $prices['avg'] }};
 
-            selectedAjax(selected, choice, avg);
+            tradeAjax(selected, choice, avg);
         });
 
         $('#partner_button').on('click', function(){
-            var selected = $('.selectpicker').find("option:selected").val();
+            var selected = $('#tradePicker').find("option:selected").val();
             var choice = 'partner';
             var avg = {{ $prices['avg'] }};
 
-            selectedAjax(selected, choice, avg);
+            tradeAjax(selected, choice, avg);
         });
 
-        function selectedAjax(selected, choice, avg){
+        $('#wishlist_button').on('click', function(){
+            var selected = $('#wishlistPicker').find("option:selected").val();
+            var quantity = $('#wishlist_quantity').val();
+
+            wishlistAjax(selected, quantity);
+        });
+
+        function tradeAjax(selected, choice, avg){
             TableURL = '{{ action('TradeController@addCardToTrade') }}';
             var formData = {
                 trade_id: selected,
@@ -131,6 +166,28 @@
                 },
                 error: function (data) {
                     $('div.return').html('<div class="col-md-12"><p>Something went wrong adding this card to your trade. Please try again or contact the developer</p></div>');
+                }
+            });
+        }
+
+        function wishlistAjax(selected, quantity){
+            TableURL = '{{ action('WishlistController@addCardToWishlist') }}';
+            var formData = {
+                wishlist_id: selected,
+                card_id: {{ $card->id }},
+                quantity: quantity
+            };
+
+            $.ajax({
+                url: TableURL,
+                type: 'POST',
+                data: formData,
+                dataType: 'JSON',
+                success: function(data) {
+                    $('div.return').html(data.html);
+                },
+                error: function (data) {
+                    $('div.return').html('<div class="col-md-12"><p>Something went wrong adding this card to your wishlist. Please try again or contact the developer</p></div>');
                 }
             });
         }

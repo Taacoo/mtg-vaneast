@@ -67,7 +67,7 @@ class TradeController extends Controller
             return redirect()->action('TradeController@tradeDetails', $inTrade->trade_id)->with('success', 'Successfully removed from trade');
         }
 
-        dd($request);
+        return redirect()->action('TradeController@tradeDetails', $inTrade->trade_id)->with('error', 'Something went wrong, please try again');
     }
 
     /**
@@ -82,9 +82,18 @@ class TradeController extends Controller
     /**
      *
      */
-    public function deleteTrade(){
+    public function removeTrade(Request $request){
+        $trade = Trade::find($request->trade_id);
 
+        foreach($trade->intrades as $c){
+            $c->delete();
+        }
+
+        if($trade->delete()){
+            return response()->json(array('html' => '<div class="alert alert-success">Successfully removed trade</div>'));
+        }
+
+        return response()->json(array('html' => '<div class="alert alert-success">Something went wrong removing this trade. Please try again</div>'));
     }
-
 
 }

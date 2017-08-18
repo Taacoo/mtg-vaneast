@@ -35,16 +35,20 @@ class SearchController extends Controller
     public function specific($id){
         $card = Card::find($id);
         $trades = Auth::user()->trades;
+        $wishlists = Auth::user()->wishlists;
 
-/*        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.deckbrew.com/mtg/cards?name=". str_replace(' ', '+', $card->name));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $output = curl_exec($ch);
-        curl_close($ch);
+        if($card->daily_avg != null){
+            $prices = [
+                'sell' => $card->daily_sell,
+                'low' => $card->daily_low,
+                'lowex' => $card->daily_lowex,
+                'lowfoil' => $card->daily_lowfoil,
+                'avg' => $card->daily_avg,
+                'trend' => $card->daily_trend
+            ];
 
-        $card_details = json_decode($output);
-        dd($card_details);
-        $card_details = $card_details[0];*/
+            return view('content.search.details', compact('card', 'prices', 'trades', 'wishlists'));
+        }
 
         $price = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$card->mcm_product_id);
 
@@ -54,9 +58,17 @@ class SearchController extends Controller
             'lowex' => $price->product->priceGuide->LOWEX,
             'lowfoil' => $price->product->priceGuide->LOWFOIL,
             'avg' => $price->product->priceGuide->AVG,
-            'trend' => $price->product->priceGuide->TREND,
+            'trend' => $price->product->priceGuide->TREND
         ];
 
-        return view('content.search.details', compact('card', 'prices', 'trades'));
+        $card->daily_sell = $price->product->priceGuide->SELL;
+        $card->daily_low = $price->product->priceGuide->LOW;
+        $card->daily_lowex = $price->product->priceGuide->LOWEX;
+        $card->daily_lowfoil = $price->product->priceGuide->LOWFOIL;
+        $card->daily_avg = $price->product->priceGuide->AVG;
+        $card->daily_trend = $price->product->priceGuide->TREND;
+        $card->save();
+
+        return view('content.search.details', compact('card', 'prices', 'trades', 'wishlists'));
     }
 }

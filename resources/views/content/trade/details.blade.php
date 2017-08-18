@@ -15,6 +15,13 @@
                             </div>
                         </div>
                     @endif
+                    @if(Session::has('error'))
+                        <div class="form-group">
+                            <div class="alert alert-danger">
+                                <span>{!! session('error') !!}</span>
+                            </div>
+                        </div>
+                    @endif
                     <div class="panel-body">
                         <a style="float: left;" class="btn btn-default" href="{{ url('trade') }}"><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;Back</a>
                         <h4 style="float:right" class="{{ (Trade::getTradeValue($trade->id) >= 0) ? 'green' : 'red' }}">&euro; {{ number_format(Trade::getTradeValue($trade->id), 2,',','.') }}</h4>

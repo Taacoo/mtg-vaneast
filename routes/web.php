@@ -12,6 +12,7 @@
 */
 
 use App\Card;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
@@ -20,34 +21,12 @@ Route::get('/', function () {
 
 Route::get('/testarea', function () {
 
-    DB::enableQueryLog();
-
-    $card = Card::find(14894);
-
-    dd($card->expansion);
-
-    $ch = curl_init();
-
-    // set url
-    curl_setopt($ch, CURLOPT_URL, "https://api.deckbrew.com/mtg/cards?name=magmaw");
-
-    //return the transfer as a string
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-    // $output contains the output string
-    $output = curl_exec($ch);
-    dd(json_decode($output));
-
-    // close curl resource to free up system resources
-    curl_close($ch);
-
-
     return view('auth.login');
 })->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about-me', 'HomeController@aboutMe')->name('about-me');
 
 Route::get('/search', 'SearchController@index');
@@ -57,8 +36,16 @@ Route::get('/card/{id}', 'SearchController@specific');
 
 Route::get('/trade', 'TradeController@index');
 Route::post('/trade/create', 'TradeController@createTrade');
-Route::post('trade/addCard', 'TradeController@addCardToTrade');
-Route::get('trade/removeCard', 'TradeController@removeFromTrade');
+Route::post('/trade/removeTrade', 'TradeController@removeTrade');
+Route::post('/trade/addCard', 'TradeController@addCardToTrade');
+Route::get('/trade/removeCard', 'TradeController@removeFromTrade');
 Route::get('/trade/{id}', 'TradeController@tradeDetails');
 
 Route::get('/request', 'PriceCheckController@request');
+
+Route::get('/wishlist', 'WishlistController@index');
+Route::post('/wishlist/create', 'WishlistController@createWishlist');
+Route::post('/wishlist/addCard', 'WishlistController@addCardToWishlist');
+Route::get('/wishlist/removeCard', 'WishlistController@removeFromWishlist');
+Route::post('/wishlist/removeWishlist', 'WishlistController@removeWishlist');
+Route::get('/wishlist/{id}', 'WishlistController@wishlistDetails');

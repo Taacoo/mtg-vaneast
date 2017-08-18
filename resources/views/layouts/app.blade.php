@@ -11,7 +11,9 @@
     <title>@yield('pagetitle') - VanEast</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}"
     <link href="//cdn.jsdelivr.net/npm/keyrune@latest/css/keyrune.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset('css/vaneast.css') }}"
 
@@ -49,9 +51,15 @@
                             <li ><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li style="display: inline-block;" @if($pageid == 'search') class="active" @endif><a href="{{ url('search') }}">Search</a>
+                            <li style="display: inline-block;" @if($pageid == 'search') class="active" @endif>
+                                <a href="{{ url('search') }}">Search</a>
                             </li>
-                            <li @if($pageid == 'trade') class="active" @endif><a href="{{ url('trade') }}">Trade</a></li>
+                            <li @if($pageid == 'trade') class="active" @endif>
+                                <a href="{{ url('trade') }}">Trade</a>
+                            </li>
+                            <li @if($pageid == 'wishlist') class="active" @endif>
+                                <a href="{{ url('wishlist') }}">Wishlist</a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -81,14 +89,14 @@
     </div>
     <footer class="footer">
         <div class="container">
-            <p class="text-center"><small>Powered by &copy; <a href="https://www.magiccardmarket.eu">Magic Card Market.</a> Created by <a href="{{ url('about-me') }}">Joshua van Oosten</a></small>
+            <p class="text-center"><small>Powered by &copy; <a target="_blank" href="https://www.magiccardmarket.eu">Magic Card Market.</a> Created by <a href="{{ url('about-me') }}">Joshua van Oosten</a></small>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/912737fa78.js"></script>
+    <!--<script src="https://use.fontawesome.com/912737fa78.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>

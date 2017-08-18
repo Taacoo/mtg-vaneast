@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\getExpansions::class,
         Commands\getCards::class,
+        Commands\checkDailyPrices::class,
     ];
 
     /**
@@ -27,6 +28,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->command('mcm:clearDailyPrices')
+                        ->dailyAt('03:00');
     }
 
     /**

@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->hasMany(Trade::class);
     }
 
+    public function wishlists(){
+        return $this->hasMany(Wishlist::class);
+    }
+
     public static function getPrices($mcm_id){
 
     }
