@@ -34,7 +34,7 @@ class AddWishlistTable extends Migration
                     ->references('id')
                     ->on('wishlists');
 
-                $table->primary(array('user_id', 'trade_id'));
+                $table->primary(array('user_id', 'wishlist_id'));
             });
         }
 
