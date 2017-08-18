@@ -26,8 +26,8 @@ Route::get('/testarea', function () {
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/about-me', 'HomeController@aboutMe')->name('about-me');
+Route::get('/', 'HomeController@index');
+Route::get('/about-me', 'HomeController@aboutMe');
 
 Route::get('/search', 'SearchController@index');
 Route::post('/searching', 'SearchController@search');

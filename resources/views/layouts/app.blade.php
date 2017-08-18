@@ -33,8 +33,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/home') }}">
-
+                    <a class="navbar-brand" href="{{ url('/') }}">
                     </a>
                 </div>
 
@@ -42,6 +41,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                     </ul>
+                    <div class="col-sm-3 col-md-3">
+                        <form action="{{ action('SearchController@search') }}" class="navbar-form" method="post" autocomplete="off">
+                            {{ csrf_field() }}
+                            <div class="input-group">
+                                <input type="text" name="card_search" class="form-control" placeholder="Search..." required/>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" style="height: 36px;" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
