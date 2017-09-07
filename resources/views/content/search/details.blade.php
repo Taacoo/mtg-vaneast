@@ -51,84 +51,83 @@
                                 </div>
                             </div>
                             @if(isset($details))
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <details>
-                                        <summary>Details</summary>
-                                        <table class="table">
-                                            <tr>
-                                                <td>Mana Cost:</td>
-                                                <td id="mana">{{ $details->manaCost }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Name:</td>
-                                                <td>{{ $details->name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Type:</td>
-                                                <td>{{ $details->type }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Text:</td>
-                                                <td id="text">{!! nl2br(e($details->text)) !!}</td>
-                                            </tr>
-                                            @if($details->power != null)
-                                            <tr>
-                                                <td>Power/Toughness</td>
-                                                <td>{{ $details->power }} / {{ $details->toughness }}</td>
-                                            </tr>
-                                            @endif
-                                        </table>
-                                    </details>
-
-                                    @if(count($details->rulings) > 0)
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <details>
-                                            <summary>Rulings</summary>
+                                            <summary>Details</summary>
                                             <table class="table">
-
-                                                @if(count($details->rulings) == 1)
                                                 <tr>
-                                                    <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
-                                                    <td>{{ base64_decode($details->rulings->text) }}</td>
+                                                    <td>Mana Cost:</td>
+                                                    <td id="mana">{{ $details->manaCost }}</td>
                                                 </tr>
-
-                                                @else
-                                                    @foreach($details->rulings as $r)
-                                                        <tr>
-                                                            <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
-                                                            <td>{{ base64_decode($details->rulings->text) }}</td>
-                                                        </tr>
-                                                    @endforeach
+                                                <tr>
+                                                    <td>Name:</td>
+                                                    <td>{{ $details->name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Type:</td>
+                                                    <td>{{ $details->type }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Text:</td>
+                                                    <td id="text">{!! nl2br(e($details->text)) !!}</td>
+                                                </tr>
+                                                @if($details->power != null)
+                                                <tr>
+                                                    <td>Power/Toughness</td>
+                                                    <td>{{ $details->power }} / {{ $details->toughness }}</td>
+                                                </tr>
                                                 @endif
                                             </table>
                                         </details>
-                                    @endif
 
-                                    @if(count($details->legalities) > 0)
-                                        <details>
-                                            <summary>Legalities</summary>
-                                            <table class="table">
+                                        @if(count($details->rulings) > 0)
+                                            <details>
+                                                <summary>Rulings</summary>
+                                                <table class="table">
 
-                                                @if(count($details->legalities) == 1)
+                                                    @if(count($details->rulings) == 1)
                                                     <tr>
-                                                        <td class="col-md-2">{{ $details->legalities->format }}</td>
-                                                        <td>{{ $details->legalities->legality }}</td>
+                                                        <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
+                                                        <td>{{ base64_decode($details->rulings->text) }}</td>
                                                     </tr>
 
-                                                @else
-                                                    @foreach($details->rulings as $r)
+                                                    @else
+                                                        @foreach($details->rulings as $r)
+                                                            <tr>
+                                                                <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
+                                                                <td>{{ base64_decode($details->rulings->text) }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                </table>
+                                            </details>
+                                        @endif
+
+                                        @if(count($details->legalities) > 0)
+                                            <details>
+                                                <summary>Legalities</summary>
+                                                <table class="table">
+
+                                                    @if(count($details->legalities) == 1)
                                                         <tr>
-                                                            <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
-                                                            <td>{{ base64_decode($details->rulings->text) }}</td>
+                                                            <td class="col-md-2">{{ $details->legalities->format }}</td>
+                                                            <td>{{ $details->legalities->legality }}</td>
                                                         </tr>
-                                                    @endforeach
-                                                @endif
-                                            </table>
-                                        </details>
-                                    @endif
+
+                                                    @else
+                                                        @foreach($details->rulings as $r)
+                                                            <tr>
+                                                                <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
+                                                                <td>{{ base64_decode($details->rulings->text) }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                </table>
+                                            </details>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
                             @endif
                             <br/>
                             <div class="row">

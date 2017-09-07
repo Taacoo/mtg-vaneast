@@ -50,7 +50,7 @@ class SearchController extends Controller
                 'trend' => $card->dailyPrice->daily_trend
             ];
 
-            return view('content.search.details', compact('card', 'prices', 'trades', 'wishlists', 'details'));
+            return view('content.search.details', compact('details', 'card', 'prices', 'trades', 'wishlists'));
         }
 
         $price = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$card->mcm_product_id);
@@ -74,6 +74,6 @@ class SearchController extends Controller
         $dailyPrice->daily_trend = $price->product->priceGuide->TREND;
         $dailyPrice->save();
 
-        return view('content.search.details', compact('card', 'prices', 'trades', 'wishlists'));
+        return view('content.search.details', compact('card', 'prices', 'trades', 'wishlists', 'details'));
     }
 }
