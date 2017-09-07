@@ -82,7 +82,7 @@ class getCardDetails extends Command
                     if($l->format == 'Modern' || $l->format == 'Modern' || $l->format == 'Commander' || $l->format == 'Legacy' || $l->format == 'Standard' ||  $l->format == 'Vintage'){
                         $format = Legality::updateOrCreate(array('format' => $l->format ));
 
-                        $format->card_id = $card->id;
+                        $format->card_detail_id = $card->id;
                         $format->format = $l->format;
                         $format->legality = $l->legality;
                         $format->save();
@@ -94,7 +94,7 @@ class getCardDetails extends Command
                 foreach($c->rulings as $r){
                     $ruling = Ruling::firstorNew(array('card_id' => $card->id, 'date' => $r->date));
 
-                    $ruling->card_id = $card->id;
+                    $ruling->card_detail_id = $card->id;
                     $ruling->text = base64_encode($r->text);
                     $ruling->date = $r->date;
                     $ruling->save();
