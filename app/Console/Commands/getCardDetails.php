@@ -92,7 +92,7 @@ class getCardDetails extends Command
 
             if(array_key_exists('rulings', $c)) {
                 foreach($c->rulings as $r){
-                    $ruling = Ruling::firstorNew(array('card_id' => $card->id, 'date' => $r->date));
+                    $ruling = Ruling::firstorNew(array('card_detail_id' => $card->id, 'date' => $r->date));
 
                     $ruling->card_detail_id = $card->id;
                     $ruling->text = base64_encode($r->text);
