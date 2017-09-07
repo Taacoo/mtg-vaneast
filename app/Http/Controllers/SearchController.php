@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\cardDetail;
+use App\dailyPrice;
 use App\MCM;
 use Illuminate\Http\Request;
 use App\Card;
@@ -36,18 +38,19 @@ class SearchController extends Controller
         $card = Card::find($id);
         $trades = Auth::user()->trades;
         $wishlists = Auth::user()->wishlists;
+        $details = cardDetail::where('name', '=', $card->name)->first();
 
-        if($card->daily_avg != null){
+        if($card->dailyPrice != null){
             $prices = [
-                'sell' => $card->daily_sell,
-                'low' => $card->daily_low,
-                'lowex' => $card->daily_lowex,
-                'lowfoil' => $card->daily_lowfoil,
-                'avg' => $card->daily_avg,
-                'trend' => $card->daily_trend
+                'sell' => $card->dailyPrice->daily_sell,
+                'low' => $card->dailyPrice->daily_low,
+                'lowex' => $card->dailyPrice->daily_lowex,
+                'lowfoil' => $card->dailyPrice->daily_lowfoil,
+                'avg' => $card->dailyPrice->daily_avg,
+                'trend' => $card->dailyPrice->daily_trend
             ];
 
-            return view('content.search.details', compact('card', 'prices', 'trades', 'wishlists'));
+            return view('content.search.details', compact('card', 'prices', 'trades', 'wishlists', 'details'));
         }
 
         $price = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$card->mcm_product_id);
@@ -61,13 +64,15 @@ class SearchController extends Controller
             'trend' => $price->product->priceGuide->TREND
         ];
 
-        $card->daily_sell = $price->product->priceGuide->SELL;
-        $card->daily_low = $price->product->priceGuide->LOW;
-        $card->daily_lowex = $price->product->priceGuide->LOWEX;
-        $card->daily_lowfoil = $price->product->priceGuide->LOWFOIL;
-        $card->daily_avg = $price->product->priceGuide->AVG;
-        $card->daily_trend = $price->product->priceGuide->TREND;
-        $card->save();
+        $dailyPrice = new dailyPrice();
+        $dailyPrice->card_id = $card->id;
+        $dailyPrice->daily_sell = $price->product->priceGuide->SELL;
+        $dailyPrice->daily_low = $price->product->priceGuide->LOW;
+        $dailyPrice->daily_lowex = $price->product->priceGuide->LOWEX;
+        $dailyPrice->daily_lowfoil = $price->product->priceGuide->LOWFOIL;
+        $dailyPrice->daily_avg = $price->product->priceGuide->AVG;
+        $dailyPrice->daily_trend = $price->product->priceGuide->TREND;
+        $dailyPrice->save();
 
         return view('content.search.details', compact('card', 'prices', 'trades', 'wishlists'));
     }

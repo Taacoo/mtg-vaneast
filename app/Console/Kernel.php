@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\getExpansions::class,
         Commands\getCards::class,
         Commands\checkDailyPrices::class,
+        Commands\getCardDetails::class,
     ];
 
     /**

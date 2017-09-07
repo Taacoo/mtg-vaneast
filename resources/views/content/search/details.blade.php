@@ -50,7 +50,87 @@
                                     </div>
                                 </div>
                             </div>
-                               <br/>
+                            @if(isset($details))
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <details>
+                                        <summary>Details</summary>
+                                        <table class="table">
+                                            <tr>
+                                                <td>Mana Cost:</td>
+                                                <td id="mana">{{ $details->manaCost }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td>{{ $details->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type:</td>
+                                                <td>{{ $details->type }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Text:</td>
+                                                <td id="text">{!! nl2br(e($details->text)) !!}</td>
+                                            </tr>
+                                            @if($details->power != null)
+                                            <tr>
+                                                <td>Power/Toughness</td>
+                                                <td>{{ $details->power }} / {{ $details->toughness }}</td>
+                                            </tr>
+                                            @endif
+                                        </table>
+                                    </details>
+
+                                    @if(count($details->rulings) > 0)
+                                        <details>
+                                            <summary>Rulings</summary>
+                                            <table class="table">
+
+                                                @if(count($details->rulings) == 1)
+                                                <tr>
+                                                    <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
+                                                    <td>{{ base64_decode($details->rulings->text) }}</td>
+                                                </tr>
+
+                                                @else
+                                                    @foreach($details->rulings as $r)
+                                                        <tr>
+                                                            <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
+                                                            <td>{{ base64_decode($details->rulings->text) }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            </table>
+                                        </details>
+                                    @endif
+
+                                    @if(count($details->legalities) > 0)
+                                        <details>
+                                            <summary>Legalities</summary>
+                                            <table class="table">
+
+                                                @if(count($details->legalities) == 1)
+                                                    <tr>
+                                                        <td class="col-md-2">{{ $details->legalities->format }}</td>
+                                                        <td>{{ $details->legalities->legality }}</td>
+                                                    </tr>
+
+                                                @else
+                                                    @foreach($details->rulings as $r)
+                                                        <tr>
+                                                            <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
+                                                            <td>{{ base64_decode($details->rulings->text) }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            </table>
+                                        </details>
+                                    @endif
+                                </div>
+                            </div>
+                            @endif
+                            <br/>
                             <div class="row">
                                 <div class="col-md-12" style="display: inline-block;">
                                     <div class="col-md-5"  style="display: inline-block;">
@@ -116,12 +196,15 @@
 
 @section('scripts')
     <script type="text/javascript">
-
         $(document).ready(function(){
             $('.selectpicker').selectpicker({
                 style: 'btn-info',
                 size: 4
             });
+
+            replaceSymbols($("#mana"));
+            replaceSymbols($("#text"));
+
         });
 
         $('#me_button').on('click', function(){
@@ -191,5 +274,23 @@
                 }
             });
         }
+
+        /**
+         * Function written by Discord: Yuudaari#0356
+         *
+         * @param element
+         */
+        function replaceSymbols(element) {
+            element.each(function () {
+                this.innerHTML = this.innerHTML.replace(/\{(?:(\d+|G|P|R|W|U|B)(?:\/(\d+|G|P|R|W|U|B))?|(CHAOS|Q|C|T|X|E))\}/g, (m, c1, c2, c3) =>
+                {
+                    const img = "mana" + ((c1 || c3) + (c2 || "")).toLowerCase();
+                return '<img style="display: inline-block; width: 25px; height: 25px;" src="https://raw.githubusercontent.com/scryfall/manamoji-discord/master/emojis/'+img+'.png" alt="${m}"/>'
+                });
+            })
+        }
+
+
+
     </script>
 @endsection

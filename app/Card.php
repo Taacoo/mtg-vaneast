@@ -27,4 +27,8 @@ class Card extends Model
     public function expansion(){
         return $this->belongsTo(Expansion::class);
     }
+
+    public function dailyPrice(){
+        return $this->hasOne(dailyPrice::class);
+    }
 }

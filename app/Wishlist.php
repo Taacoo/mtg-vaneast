@@ -35,42 +35,47 @@ class Wishlist extends Model
     public static function getCardValue($card_id){
         $card = Card::find($card_id);
 
-        if($card->daily_avg === null){
+
+        if($card->dailyPrice == null){
             $mcm = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$card->mcm_product_id);
 
-            $card->daily_sell = $mcm->product->priceGuide->SELL;
-            $card->daily_low = $mcm->product->priceGuide->LOW;
-            $card->daily_lowex = $mcm->product->priceGuide->LOWEX;
-            $card->daily_lowfoil = $mcm->product->priceGuide->LOWFOIL;
-            $card->daily_avg = $mcm->product->priceGuide->AVG;
-            $card->daily_trend = $mcm->product->priceGuide->TREND;
-            $card->save();
+            $dailyPrice = new dailyPrice();
+            $dailyPrice->card_id = $card->id;
+            $dailyPrice->daily_sell = $mcm->product->priceGuide->SELL;
+            $dailyPrice->daily_low = $mcm->product->priceGuide->LOW;
+            $dailyPrice->daily_lowex = $mcm->product->priceGuide->LOWEX;
+            $dailyPrice->daily_lowfoil = $mcm->product->priceGuide->LOWFOIL;
+            $dailyPrice->daily_avg = $mcm->product->priceGuide->AVG;
+            $dailyPrice->daily_trend = $mcm->product->priceGuide->TREND;
+            $dailyPrice->save();
 
             return $mcm->product->priceGuide->AVG;
         }
 
-        return $card->daily_avg;
+        return $card->dailyPrice->daily_avg;
     }
 
     public static function getTotalCardValue($card_id, $inwishlist_id){
         $card = Card::find($card_id);
         $wishlist_card = Inwishlist::find($inwishlist_id);
 
-        if($card->daily_avg === null){
+        if($card->dailyPrice == null){
             $mcm = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$card->mcm_product_id);
 
-            $card->daily_sell = $mcm->product->priceGuide->SELL;
-            $card->daily_low = $mcm->product->priceGuide->LOW;
-            $card->daily_lowex = $mcm->product->priceGuide->LOWEX;
-            $card->daily_lowfoil = $mcm->product->priceGuide->LOWFOIL;
-            $card->daily_avg = $mcm->product->priceGuide->AVG;
-            $card->daily_trend = $mcm->product->priceGuide->TREND;
-            $card->save();
+            $dailyPrice = new dailyPrice();
+            $dailyPrice->card_id = $card->id;
+            $dailyPrice->daily_sell = $mcm->product->priceGuide->SELL;
+            $dailyPrice->daily_low = $mcm->product->priceGuide->LOW;
+            $dailyPrice->daily_lowex = $mcm->product->priceGuide->LOWEX;
+            $dailyPrice->daily_lowfoil = $mcm->product->priceGuide->LOWFOIL;
+            $dailyPrice->daily_avg = $mcm->product->priceGuide->AVG;
+            $dailyPrice->daily_trend = $mcm->product->priceGuide->TREND;
+            $dailyPrice->save();
 
             return $mcm->product->priceGuide->AVG * $wishlist_card->quantity;
         }
 
-        return $card->daily_avg * $wishlist_card->quantity;
+        return $card->dailyPrice->daily_avg * $wishlist_card->quantity;
     }
 
     public static function getWishlistValue($id){
@@ -85,18 +90,21 @@ class Wishlist extends Model
                 $value = $value + $avg;
 
                 $card = Card::find($c->card->id);
-                $card->daily_sell = $mcm->product->priceGuide->SELL;
-                $card->daily_low = $mcm->product->priceGuide->LOW;
-                $card->daily_lowex = $mcm->product->priceGuide->LOWEX;
-                $card->daily_lowfoil = $mcm->product->priceGuide->LOWFOIL;
-                $card->daily_avg = $mcm->product->priceGuide->AVG;
-                $card->daily_trend = $mcm->product->priceGuide->TREND;
-                $card->save();
+
+                $dailyPrice = new dailyPrice();
+                $dailyPrice->card_id = $card->id;
+                $dailyPrice->daily_sell = $mcm->product->priceGuide->SELL;
+                $dailyPrice->daily_low = $mcm->product->priceGuide->LOW;
+                $dailyPrice->daily_lowex = $mcm->product->priceGuide->LOWEX;
+                $dailyPrice->daily_lowfoil = $mcm->product->priceGuide->LOWFOIL;
+                $dailyPrice->daily_avg = $mcm->product->priceGuide->AVG;
+                $dailyPrice->daily_trend = $mcm->product->priceGuide->TREND;
+                $dailyPrice->save();
 
                 continue;
             }
 
-            $value = $value + ($c->card->daily_avg * $c->quantity);
+            $value = $value + ($c->card->dailyPrice->daily_avg * $c->quantity);
             continue;
         }
 

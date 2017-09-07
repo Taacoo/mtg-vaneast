@@ -39,13 +39,13 @@ class getCards extends Command
      */
     public function handle()
     {
-        $expansions = Expansion::all();
+        $expansions = Expansion::where('id', '>', 310)->get();
 
         foreach($expansions as $expansion){
             $cards = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/expansions/'. $expansion->mcm_expansion_id .'/singles');
 
             foreach ($cards->single as $c){
-                $card = new Card;
+                $card = Card::firstorNew(array('mcm_product_id' => $c->idProduct));
 
                 $card->name = $c->enName;
                 $card->mcm_product_id = $c->idProduct;

@@ -67,10 +67,10 @@
                                 <a href="{{ url('search') }}">Search</a>
                             </li>
                             <li @if($pageid == 'trade') class="active" @endif>
-                                <a href="{{ url('trade') }}">Trade</a>
+                                <a href="{{ url('trade') }}">Trades</a>
                             </li>
                             <li @if($pageid == 'wishlist') class="active" @endif>
-                                <a href="{{ url('wishlist') }}">Wishlist</a>
+                                <a href="{{ url('wishlist') }}">Wishlists</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

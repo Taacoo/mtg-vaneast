@@ -21,7 +21,8 @@ Route::get('/', function () {
 
 Route::get('/testarea', function () {
 
-    return view('auth.login');
+    $card = Card::firstorCreate(array('mcm_product_id' => 299584));
+    dd($card);
 })->middleware('auth');
 
 Auth::routes();
@@ -49,3 +50,5 @@ Route::post('/wishlist/addCard', 'WishlistController@addCardToWishlist');
 Route::get('/wishlist/removeCard', 'WishlistController@removeFromWishlist');
 Route::post('/wishlist/removeWishlist', 'WishlistController@removeWishlist');
 Route::get('/wishlist/{id}', 'WishlistController@wishlistDetails');
+
+Route::get('/cards', 'CardController@index');

@@ -44,7 +44,7 @@ class getExpansions extends Command
 
 
         foreach($return->expansion as $e){
-            $exp = new Expansion();
+            $exp = Expansion::firstorNew(array('mcm_expansion_id' => $e->idExpansion));
 
             $exp->name = $e->enName;
             $exp->abbreviation = $e->abbreviation;
