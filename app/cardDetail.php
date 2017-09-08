@@ -11,7 +11,7 @@ class cardDetail extends Model
     ];
 
     public function legalities(){
-        return $this->belongsTo(Legality::class);
+        return $this->hasMany(Legality::class);
     }
 
     public function rulings(){

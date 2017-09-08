@@ -116,10 +116,10 @@
                                                         </tr>
 
                                                     @else
-                                                        @foreach($details->rulings as $r)
+                                                        @foreach($details->legalities as $r)
                                                             <tr>
-                                                                <td class="col-md-2">{{ date('d-m-Y', strtotime($details->rulings->date)) }}</td>
-                                                                <td>{{ base64_decode($details->rulings->text) }}</td>
+                                                                <td class="col-md-2">{{ $r->format }}</td>
+                                                                <td>{{ $r->legality }}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endif
