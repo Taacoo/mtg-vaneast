@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Card;
+use App\dailyPrice;
 use Illuminate\Console\Command;
 
 class checkDailyPrices extends Command
@@ -37,21 +38,6 @@ class checkDailyPrices extends Command
      */
     public function handle()
     {
-        $cards = Card::where('daily_avg', '!=', null)->get();
-
-        foreach($cards as $c){
-            if(date('d-m-Y', strtotime($c->updated_at)) != date('d-m-Y')){
-                $c->daily_sell = null;
-                $c->daily_low = null;
-                $c->daily_lowex = null;
-                $c->daily_lowfoil = null;
-                $c->daily_avg = null;
-                $c->daily_trend = null;
-                $c->save();
-
-                continue;
-            }
-            continue;
-        }
+        dailyPrice::truncate();
     }
 }

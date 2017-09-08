@@ -80,7 +80,7 @@ class getCardDetails extends Command
             if(array_key_exists('legalities', $c)) {
                 foreach($c->legalities as $l){
                     if($l->format == 'Modern' || $l->format == 'Modern' || $l->format == 'Commander' || $l->format == 'Legacy' || $l->format == 'Standard' ||  $l->format == 'Vintage'){
-                        $format = Legality::updateOrCreate(array('card_detail_id' => $card->id));
+                        $format = Legality::updateOrCreate(array('card_detail_id' => $card->id, 'format' => $l->format));
 
                         $format->card_detail_id = $card->id;
                         $format->format = $l->format;
