@@ -84,7 +84,7 @@ class Wishlist extends Model
 
         foreach($wishlist_cards as $c){
 
-            if($c->card->daily_avg === null){
+            if($c->card->dailyPrice->daily_avg === null){
                 $mcm = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$c->card->mcm_product_id);
                 $avg = $mcm->product->priceGuide->AVG * $c->quantity;
                 $value = $value + $avg;
@@ -109,5 +109,16 @@ class Wishlist extends Model
         }
 
         return $value;
+    }
+
+    public static function allWishlistValue(){
+        $inWishlist = Wishlist::all();
+        $value = 0;
+
+        foreach($inWishlist as $W){
+            //Do Something
+        }
+
+        return 'TO DO';
     }
 }

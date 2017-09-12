@@ -27,6 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function isAdmin(){
+        if ($this->email('info@vaneast.nl')){
+            return true;
+        }
+        return false;
+    }
+
     public function trades(){
         return $this->hasMany(Trade::class);
     }
@@ -35,7 +42,4 @@ class User extends Authenticatable
         return $this->hasMany(Wishlist::class);
     }
 
-    public static function getPrices($mcm_id){
-
-    }
 }

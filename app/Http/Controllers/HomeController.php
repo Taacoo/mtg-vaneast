@@ -28,4 +28,8 @@ class HomeController extends Controller
     public function aboutUs(){
         return view('about-us');
     }
+
+    public function errorFourOFour(){
+        return redirect('/');
+    }
 }

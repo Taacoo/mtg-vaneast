@@ -24,7 +24,6 @@ Route::get('/testarea', function () {
     $card = Card::firstorCreate(array('mcm_product_id' => 299584));
     dd($card);
 })->middleware('auth');
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
@@ -52,3 +51,10 @@ Route::post('/wishlist/removeWishlist', 'WishlistController@removeWishlist');
 Route::get('/wishlist/{id}', 'WishlistController@wishlistDetails');
 
 Route::get('/cards', 'CardController@index');
+
+/**
+ * Admin Routes
+ */
+
+Route::get('/admin', 'Admin\HomeController@index');
+Route::get('/{fourOfour}', 'HomeController@errorFourOFour');

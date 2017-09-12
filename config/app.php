@@ -231,5 +231,8 @@ return [
         'MCM' => App\MCM::class,
         'Trade' => App\Trade::class,
         'Wishlist' => App\Wishlist::class,
+        'Card' => App\Card::class,
+        'CardDetails' => App\cardDetail::class,
+        'User' => App\User::class,
     ],
 ];

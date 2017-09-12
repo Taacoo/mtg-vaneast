@@ -67,4 +67,15 @@ class Trade extends Model
 
         return $value;
     }
+
+    public static function allTradeValue(){
+        $inTrade = Intrade::all();
+        $value = 0;
+
+        foreach($inTrade as $T){
+            $value = $value + $T->price_avg;
+        }
+
+        return $value;
+    }
 }
