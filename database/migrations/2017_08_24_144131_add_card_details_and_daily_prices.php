@@ -27,7 +27,7 @@ class AddCardDetailsAndDailyPrices extends Migration
             });
         }
 
-        if(!Schema::hasTable('cardDetails')) {
+        if(!Schema::hasTable('card_details')) {
             Schema::create('cardDetails', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 255)->nullable();

@@ -39,12 +39,11 @@ class AddWishlistTable extends Migration
         }
 
         if(!Schema::hasTable('inwishlists')) {
-
             Schema::create('inwishlists', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('wishlist_id', false)->length(10)->nullable();
-                $table->integer('card_id', false)->length(10)->nullable();
-                $table->integer('quantity', false)->length(10)->nullable();
+                $table->integer('wishlist_id', false)->length(10)->nullable()->unsigned();
+                $table->integer('card_id', false)->length(10)->nullable()->unsigned();
+                $table->integer('quantity', false)->length(10)->nullable()->unsigned();
                 $table->timestamps();
             });
         }

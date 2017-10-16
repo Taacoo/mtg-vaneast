@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
         $schedule->command('mcm:clearDailyPrices')
-                        ->dailyAt('03:00');
+                        ->dailyAt('23:50');
     }
 
     /**

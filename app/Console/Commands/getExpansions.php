@@ -47,8 +47,8 @@ class getExpansions extends Command
             $exp = Expansion::firstorNew(array('mcm_expansion_id' => $e->idExpansion));
 
             $exp->name = $e->enName;
-            $exp->abbreviation = $e->abbreviation;
-            $exp->icon = $e->icon;
+            $exp->mcm_abbr = $e->abbreviation;
+            $exp->icon_abbr = $e->icon;
             $exp->mcm_expansion_id = $e->idExpansion;
             $exp->release_date = Carbon::parse($e->releaseDate);
 

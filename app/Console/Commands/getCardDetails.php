@@ -18,7 +18,7 @@ class getCardDetails extends Command
      *
      * @var string
      */
-    protected $signature = 'api:getCardDetails';
+    protected $signature = 'csv:getCardDetails';
 
     /**
      * The console command description.
@@ -44,14 +44,15 @@ class getCardDetails extends Command
      */
     public function handle()
     {
-        $path = storage_path() . "/json/AllCards-x.json";
+        $path = storage_path() . "/json/XLN.json";
         if (!File::exists($path)) {
             throw new Exception("Invalid File");
         }
 
         $file = json_decode(File::get($path));
+        $bar = $this->output->createProgressBar(count($file->cards));
 
-        foreach($file as $c){
+        foreach($file->cards as $c){
 
             $card = cardDetail::updateOrCreate(array('name' => $c->name));
 
@@ -100,7 +101,10 @@ class getCardDetails extends Command
                     $ruling->save();
                 }
             }
+            $bar->advance();
         }
+
+        $bar->finish();
 
     }
 }

@@ -19,7 +19,7 @@
                                         <div class="card-block">
                                             <h4 class="card-title">Total Cards</h4>
                                             <p class="card-text">{{ Card::count() }}</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <a href="{{ action('Admin\CardController@index') }}" class="btn btn-primary">View Cards</a>
                                         </div>
                                     </div>
                                 </div>
@@ -27,9 +27,9 @@
                                     <div class="card text-center" style="width: 20rem;">
                                         <i class="ss ss-lea" style="font-size: 5em;"></i>
                                         <div class="card-block">
-                                            <h4 class="card-title">Card Details</h4>
-                                            <p class="card-text">{{ CardDetails::count() }}</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <h4 class="card-title">Latest Expansion</h4>
+                                            <p class="card-text"><a href="{{ action('Admin\ExpansionController@specific', DB::table('expansions')->orderBy('id', 'desc')->first()->id) }}">{{ DB::table('expansions')->orderBy('id', 'desc')->first()->name }}</a></p>
+                                            <a href="{{ action('Admin\ExpansionController@index') }}" class="btn btn-primary">View Expansions</a>
                                         </div>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                                         <div class="card-block">
                                             <h4 class="card-title">Users</h4>
                                             <p class="card-text">{{ User::count()-1 }}</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <a href="{{ action('Admin\UserController@index') }}" class="btn btn-primary">View Users</a>
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                         <div class="card-block">
                                             <h4 class="card-title">Trades</h4>
                                             <p class="card-text">{{ Trade::count() }}</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <a href="{{ action('Admin\TradeController@index') }}" class="btn btn-primary">View Trades</a>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                         <div class="card-block">
                                             <h4 class="card-title">Wishlists</h4>
                                             <p class="card-text">{{ Wishlist::count() }}</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            <a href="{{ action('Admin\WishlistController@index') }}" class="btn btn-primary">View Wishlists</a>
                                         </div>
                                     </div>
                                 </div>
