@@ -35,7 +35,7 @@
                                 <div class="result">
                                     @if(isset($result))
                                         @foreach($result as $r)
-                                            <span><a class="searched" data-image="https://magiccardmarket.eu{!! ltrim($r->img_path, '.') !!}" href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->abbreviation) }}" ></i></a></span></br>
+                                            <span><a class="searched" data-image="https://magiccardmarket.eu{!! ltrim($r->img_path, '.') !!}" href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->mcm_abbr) }}" ></i></a></span></br>
                                         @endforeach
                                     @endif
                                 </div>
