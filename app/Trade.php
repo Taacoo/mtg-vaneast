@@ -36,7 +36,7 @@ class Trade extends Model
         $value = 0;
 
         foreach($inTrade as $i){
-            $value = $value + $i->price_avg;
+            $value = $value + $i->price_trend;
         }
 
         return '&euro; ' . number_format($value, 2,',','.');
@@ -47,7 +47,7 @@ class Trade extends Model
         $value = 0;
 
         foreach($inTrade as $i){
-            $value = $value + $i->price_avg;
+            $value = $value + $i->price_trend;
         }
 
         return '&euro; ' . number_format($value, 2,',','.');
@@ -59,10 +59,10 @@ class Trade extends Model
 
         foreach($inTrade as $i){
             if($i->belongs_to == 1){
-                $value = $value + $i->price_avg;
+                $value = $value + $i->price_trend;
                 continue;
             }
-            $value = $value - $i->price_avg;
+            $value = $value - $i->price_trend;
         }
 
         return $value;
@@ -73,7 +73,7 @@ class Trade extends Model
         $value = 0;
 
         foreach($inTrade as $T){
-            $value = $value + $T->price_avg;
+            $value = $value + $T->price_trend;
         }
 
         return $value;

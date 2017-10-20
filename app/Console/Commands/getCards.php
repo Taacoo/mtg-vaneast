@@ -39,7 +39,7 @@ class getCards extends Command
      */
     public function handle()
     {
-        $expansions = Expansion::where('id', '<', 311)->get();
+        $expansions = Expansion::where('id', '>=', 311)->get();
 
         foreach($expansions as $expansion){
             $cards = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/expansions/'. $expansion->mcm_expansion_id .'/singles');

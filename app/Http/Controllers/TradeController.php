@@ -49,11 +49,11 @@ class TradeController extends Controller
         $inTrade = new Intrade();
         $inTrade->trade_id = $trade;
         $inTrade->card_id = $card;
-        $inTrade->price_sell = '';
-        $inTrade->price_low = '';
-        $inTrade->price_lowfoil = '';
-        $inTrade->price_avg = $request->avg;
-        $inTrade->price_trend = '';
+        $inTrade->price_sell = $request->prices['sell'];
+        $inTrade->price_low = $request->prices['low'];
+        $inTrade->price_lowfoil = $request->prices['lowfoil'];
+        $inTrade->price_avg = $request->prices['avg'];
+        $inTrade->price_trend = $request->prices['trend'];
         $inTrade->belongs_to = ($request->choice == 'me') ? 1 : 0;
         $inTrade->save();
 

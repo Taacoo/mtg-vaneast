@@ -28,36 +28,34 @@
                         <hr/>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="col-md-6">
-                                    <h4>{{ Auth::user()->name }}</h4>
-                                    <table class="display table">
-                                        <thead>
+                                <h4>{{ Auth::user()->name }}</h4>
+                                <table class="display table">
+                                    <thead>
+                                    <tr>
+                                        <th>Card</th>
+                                        <th>Quantity</th>
+                                        <th>Value</th>
+                                        <th>Total Value</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($wishlist->inwishlists as $i)
                                         <tr>
-                                            <th>Card</th>
-                                            <th>Quantity</th>
-                                            <th>Value</th>
-                                            <th>Total Value</th>
-                                            <th>Remove</th>
+                                            <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->abbreviation) }}" ></i></td>
+                                            <td colspan="1">{{$i->quantity }}</td>
+                                            <td colspan="1">&euro; {{ number_format(Wishlist::getCardValue($i->card->id), 2,',', '.') }}</td>
+                                            <td colspan="1">&euro; {{ number_format(Wishlist::getTotalCardValue($i->card->id, $i->id), 2,',', '.') }}</td>
+                                            <td colspan="1"><a href="{{ action('WishlistController@removeFromWishlist', ['id' => $i->id]) }}" id="remove" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($wishlist->inwishlists as $i)
-                                            <tr>
-                                                <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->abbreviation) }}" ></i></td>
-                                                <td colspan="1">{{$i->quantity }}</td>
-                                                <td colspan="1">&euro; {{ number_format(Wishlist::getCardValue($i->card->id), 2,',', '.') }}</td>
-                                                <td colspan="1">&euro; {{ number_format(Wishlist::getTotalCardValue($i->card->id, $i->id), 2,',', '.') }}</td>
-                                                <td colspan="1"><a href="{{ action('WishlistController@removeFromWishlist', ['id' => $i->id]) }}" id="remove" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a></td>
-                                            </tr>
-                                        @endforeach
-                                        <tr>
-                                            <td colspan="3"><b>Total:</b></td>
-                                            <td colspan="1">&euro; {{ number_format(Wishlist::getWishlistValue($wishlist->id), 2,',', '.') }}</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="3"><b>Total:</b></td>
+                                        <td colspan="1">&euro; {{ number_format(Wishlist::getWishlistValue($wishlist->id), 2,',', '.') }}</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

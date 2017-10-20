@@ -209,9 +209,17 @@
         $('#me_button').on('click', function(){
             var selected = $('#tradePicker').find("option:selected").val();
             var choice = 'me';
-            var avg = {{ $prices['avg'] }};
+            var prices = {
+                sell : '{{ $prices['sell'] }}',
+                low : '{{ $prices['low'] }}',
+                lowex : '{{ $prices['lowex'] }}',
+                lowfoil : '{{ $prices['lowfoil'] }}',
+                avg : '{{ $prices['avg'] }}',
+                trend : '{{ $prices['trend'] }}'
+            };
 
-            tradeAjax(selected, choice, avg);
+
+            tradeAjax(selected, choice, prices);
         });
 
         $('#partner_button').on('click', function(){
@@ -229,13 +237,13 @@
             wishlistAjax(selected, quantity);
         });
 
-        function tradeAjax(selected, choice, avg){
+        function tradeAjax(selected, choice, prices){
             TableURL = '{{ action('TradeController@addCardToTrade') }}';
             var formData = {
                 trade_id: selected,
-                card_id: {{ $card->id }},
+                card_id: '{{ $card->id }}',
                 choice: choice,
-                avg: avg
+                prices: prices
             };
 
             $.ajax({

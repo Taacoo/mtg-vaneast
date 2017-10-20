@@ -75,7 +75,7 @@ class Wishlist extends Model
             return $mcm->product->priceGuide->AVG * $wishlist_card->quantity;
         }
 
-        return $card->dailyPrice->daily_avg * $wishlist_card->quantity;
+        return $card->dailyPrice->daily_trend * $wishlist_card->quantity;
     }
 
     public static function getWishlistValue($id){
@@ -104,7 +104,7 @@ class Wishlist extends Model
                 continue;
             }
 
-            $value = $value + ($c->card->dailyPrice->daily_avg * $c->quantity);
+            $value = $value + ($c->card->dailyPrice->daily_trend * $c->quantity);
             continue;
         }
 
