@@ -225,9 +225,16 @@
         $('#partner_button').on('click', function(){
             var selected = $('#tradePicker').find("option:selected").val();
             var choice = 'partner';
-            var avg = {{ $prices['avg'] }};
+            var prices = {
+                sell : '{{ $prices['sell'] }}',
+                low : '{{ $prices['low'] }}',
+                lowex : '{{ $prices['lowex'] }}',
+                lowfoil : '{{ $prices['lowfoil'] }}',
+                avg : '{{ $prices['avg'] }}',
+                trend : '{{ $prices['trend'] }}'
+            };
 
-            tradeAjax(selected, choice, avg);
+            tradeAjax(selected, choice, prices);
         });
 
         $('#wishlist_button').on('click', function(){
