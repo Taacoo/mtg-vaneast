@@ -43,7 +43,7 @@
                                         @foreach($trade->intrades as $i)
                                             @if($i->belongs_to == 1)
                                                 <tr>
-                                                    <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->abbreviation) }}" ></i></td>
+                                                    <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->mcm_abbr) }}" ></i></td>
                                                     <td colspan="1">&euro; {{ number_format($i->price_trend, 2,',', '.') }}</td>
                                                     <td colspan="1"><a href="{{ action('TradeController@removeFromTrade', ['id' => $i->id]) }}" id="remove" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                                 </tr>

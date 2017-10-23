@@ -42,7 +42,7 @@
                                     <tbody>
                                     @foreach($wishlist->inwishlists as $i)
                                         <tr>
-                                            <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->abbreviation) }}" ></i></td>
+                                            <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->mcm_abbr) }}" ></i></td>
                                             <td colspan="1">{{$i->quantity }}</td>
                                             <td colspan="1">&euro; {{ number_format(Wishlist::getCardValue($i->card->id), 2,',', '.') }}</td>
                                             <td colspan="1">&euro; {{ number_format(Wishlist::getTotalCardValue($i->card->id, $i->id), 2,',', '.') }}</td>
