@@ -39,6 +39,9 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                    <li @if($pageid == 'admin') class="active" @endif>
+                        <a href="{{ action('Admin\HomeController@index') }}">Admin</a>
+                    </li>
                 </ul>
 
             <!-- Right Side Of Navbar -->
@@ -49,12 +52,9 @@
                         <li ><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
-                        <li @if($pageid == 'trade') class="active" @endif>
-                            <a href="{{ url('trade') }}">Trades</a>
-                        </li>
-                        <li @if($pageid == 'wishlist') class="active" @endif>
-                            <a href="{{ url('wishlist') }}">Wishlists</a>
-                        </li>
+                        {{--<li @if($pageid == 'wishlist') class="active" @endif>--}}
+                            {{--<a href="{{ url('wishlist') }}">Wishlists</a>--}}
+                        {{--</li>--}}
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -96,8 +96,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!--<script src="https://use.fontawesome.com/912737fa78.js"></script>-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script>
     $.ajaxSetup({

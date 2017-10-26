@@ -64,6 +64,7 @@ Route::get('/admin/cards', 'Admin\CardController@index');
 Route::get('/admin/cards/{id}', 'Admin\CardController@details');
 
 Route::get('/admin/expansions', 'Admin\ExpansionController@index');
+Route::post('/admin/expansion/saveIconAbbr', 'Admin\ExpansionController@saveIconAbbr');
 Route::get('/admin/expansions/{id}', 'Admin\ExpansionController@details');
 
 Route::get('/admin/trades', 'Admin\TradeController@index');

@@ -14,9 +14,10 @@ class AddAdminInfoTables extends Migration
     public function up()
     {
         if(!Schema::hasTable('daily_price_requests')) {
-            Schema::create('cardDetails', function (Blueprint $table) {
+            Schema::create('daily_price_requests', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('amount')->lenth(10)->unsigned()->nullable();
+                $table->decimal('value', 8,2)->default(0.00);
                 $table->timestamps();
             });
         }

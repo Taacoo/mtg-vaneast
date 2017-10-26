@@ -13,7 +13,8 @@ class ExpansionController extends Controller
     }
 
     public function index(){
-        $expansions = Expansion::all();
+        $expansions = Expansion::orderBy('id', 'desc')->get();
+
         return view('admin.expansion.index', compact('expansions'));
     }
 
@@ -21,5 +22,20 @@ class ExpansionController extends Controller
         $expansion = Expansion::find($id);
 
         return view('admin.expansion.details', compact('expansion'));
+    }
+
+    public function saveIconAbbr(Request $request){
+        $id = base64_decode($request->id);
+
+        $expansion = Expansion::find($id);
+
+        if($expansion === null){
+            die;
+        }
+
+        $expansion->icon_abbr = $request->value;
+        $expansion->save();
+
+        return 'succes';
     }
 }

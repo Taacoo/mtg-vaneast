@@ -94,3 +94,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
 .green{
     color: green;
 }
+
+.icon_abbr_input{
+    width: 60%;
+    margin: 0;
+}

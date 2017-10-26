@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Card;
 use App\dailyPrice;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class checkDailyPrices extends Command
 {
@@ -38,6 +39,19 @@ class checkDailyPrices extends Command
      */
     public function handle()
     {
+        $checked = dailyPrice::all();
+        if(count($checked) != 0){
+            $price = 0;
+            foreach($checked as $c){
+                $price = $price + $c->daily_avg;
+            }
+
+            DB::table('daily_pric_requests')->insert([
+                'amount' => count($checked),
+                'value' => $price,
+            ]);
+        }
+
         dailyPrice::truncate();
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['pageid' => 'Admin Panel'])
+@extends('admin.layouts.app', ['pageid' => 'Admin Panel'])
 @section('pagetitle', 'Admin Panel')
 
 @section('content')
@@ -28,7 +28,7 @@
                                         <i class="ss ss-lea" style="font-size: 5em;"></i>
                                         <div class="card-block">
                                             <h4 class="card-title">Latest Expansion</h4>
-                                            <p class="card-text"><a href="{{ action('Admin\ExpansionController@specific', DB::table('expansions')->orderBy('id', 'desc')->first()->id) }}">{{ DB::table('expansions')->orderBy('id', 'desc')->first()->name }}</a></p>
+                                            <p class="card-text"><a href="{{ action('Admin\ExpansionController@details', DB::table('expansions')->orderBy('id', 'desc')->first()->id) }}">{{ DB::table('expansions')->orderBy('id', 'desc')->first()->name }}</a></p>
                                             <a href="{{ action('Admin\ExpansionController@index') }}" class="btn btn-primary">View Expansions</a>
                                         </div>
                                     </div>
