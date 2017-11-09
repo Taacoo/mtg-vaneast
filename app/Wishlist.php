@@ -36,7 +36,7 @@ class Wishlist extends Model
         $card = Card::find($card_id);
 
 
-        if($card->dailyPrice == null){
+        if($card->dailyPrice === null){
             $mcm = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$card->mcm_product_id);
 
             $dailyPrice = new dailyPrice();
@@ -59,7 +59,7 @@ class Wishlist extends Model
         $card = Card::find($card_id);
         $wishlist_card = Inwishlist::find($inwishlist_id);
 
-        if($card->dailyPrice == null){
+        if($card->dailyPrice === null){
             $mcm = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$card->mcm_product_id);
 
             $dailyPrice = new dailyPrice();
@@ -84,7 +84,7 @@ class Wishlist extends Model
 
         foreach($wishlist_cards as $c){
 
-            if($c->card->dailyPrice->daily_avg === null){
+            if($c->card->dailyPrice === null){
                 $mcm = MCM::request('https://www.mkmapi.eu/ws/v2.0/output.json/products/'.$c->card->mcm_product_id);
                 $avg = $mcm->product->priceGuide->AVG * $c->quantity;
                 $value = $value + $avg;

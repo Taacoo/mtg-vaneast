@@ -72,9 +72,9 @@ class WishlistController extends Controller
         $inWishlist = Inwishlist::find($request->id);
 
         if($inWishlist->delete()){
-            return redirect()->action('WishlistController@wishlistDetails', $inWishlist->trade_id)->with('error', 'Successfully removed from trade');
+            return redirect()->action('WishlistController@wishlistDetails', $inWishlist->wishlist_id)->with('success', 'Successfully removed from trade');
         }
 
-        return redirect()->action('WishlistController@wishlistDetails', $inWishlist->trade_id)->with('error', 'Something went wrong, please try again');
+        return redirect()->action('WishlistController@wishlistDetails', $inWishlist->wishlist_id)->with('error', 'Something went wrong, please try again');
     }
 }
