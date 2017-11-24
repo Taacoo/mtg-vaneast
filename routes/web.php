@@ -50,6 +50,9 @@ Route::get('/wishlist/{id}', 'WishlistController@wishlistDetails');
 
 Route::get('/cards', 'CardController@index');
 
+Route::get('/import', 'ImportController@index');
+Route::post('/process', 'ImportController@process');
+
 /**
  * Admin Routes
  */
