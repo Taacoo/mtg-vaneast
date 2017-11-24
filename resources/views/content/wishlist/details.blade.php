@@ -44,7 +44,7 @@
                                     <tbody>
                                     @foreach($wishlist->inwishlists as $i)
                                         <tr>
-                                            <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->mcm_abbr) }}" ></i></td>
+                                            <td colspan="1"><a class="img-hover" data-image="https://magiccardmarket.eu{!! ltrim($i->card->img_path, '.') !!}" href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->mcm_abbr) }}" ></i></td>
                                             <td colspan="1">{{$i->quantity }}</td>
                                             <td class="excluded" colspan="1">&euro; {{ number_format(Wishlist::getCardValue($i->card->id), 2,',', '.') }}</td>
                                             <td class="excluded" colspan="1">&euro; {{ number_format(Wishlist::getTotalCardValue($i->card->id, $i->id), 2,',', '.') }}</td>
@@ -67,3 +67,18 @@
     </div>
 @endsection
 
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".img-hover").mouseenter(function(){
+                var image_name=$(this).data('image');
+                var imageTag='<div style="position:absolute; z-index: 1; left: 150px;">'+'<img src="'+image_name+'" alt="image" height="250" />'+'</div>';
+                $(this).parent('td').append(imageTag);
+            });
+
+            $(".img-hover").mouseleave(function(){
+                $(this).parent('td').children('div').remove();
+            });
+        });
+    </script>
+@endsection

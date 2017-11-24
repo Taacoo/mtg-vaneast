@@ -43,7 +43,7 @@
                                         @foreach($trade->intrades as $i)
                                             @if($i->belongs_to == 1)
                                                 <tr>
-                                                    <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->mcm_abbr) }}" ></i></td>
+                                                    <td colspan="1"><a class="img-hover" data-image="https://magiccardmarket.eu{!! ltrim($i->card->img_path, '.') !!}" href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->mcm_abbr) }}" ></i></td>
                                                     <td colspan="1">&euro; {{ number_format($i->price_trend, 2,',', '.') }}</td>
                                                     <td colspan="1"><a href="{{ action('TradeController@removeFromTrade', ['id' => $i->id]) }}" id="remove" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                                 </tr>
@@ -71,7 +71,7 @@
                                         @foreach($trade->intrades as $i)
                                             @if($i->belongs_to != 1)
                                                 <tr>
-                                                    <td colspan="1"><a href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->abbreviation) }}" ></i></td>
+                                                    <td colspan="1"><a class="img-hover" data-image="https://magiccardmarket.eu{!! ltrim($i->card->img_path, '.') !!}" href="{{ url('card') . '/'. $i->card->id}}">{{ $i->card->name }}</a> <i class="{{ $i->card->rarity }} ss ss-{{ strtolower($i->card->expansion->abbreviation) }}" ></i></td>
                                                     <td colspan="1">&euro; {{ number_format($i->price_trend, 2,',', '.') }}</td>
                                                     <td colspan="1"><a href="{{ action('TradeController@removeFromTrade', ['id' => $i->id]) }}" id="remove" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                                 </tr>
@@ -96,6 +96,16 @@
 
 @section('scripts')
     <script type="text/javascript">
+        $(document).ready(function(){
+            $(".img-hover").mouseenter(function(){
+                var image_name=$(this).data('image');
+                var imageTag='<div style="position:absolute; z-index: 1; left: 150px;">'+'<img src="'+image_name+'" alt="image" height="250" />'+'</div>';
+                $(this).parent('td).append(imageTag);
+            });
 
+            $(".img-hover").mouseleave(function(){
+                $(this).parent('td').children('div').remove();
+            });
+        });
     </script>
 @endsection

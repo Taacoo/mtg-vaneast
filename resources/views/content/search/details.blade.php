@@ -1,6 +1,5 @@
 @extends('layouts.app', ['pageid' => 'search'])
 @section('pagetitle', 'Search')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 @section('content')
     <div class="container-fluid">
         <div class="row">
