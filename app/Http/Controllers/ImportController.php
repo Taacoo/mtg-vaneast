@@ -61,14 +61,21 @@ class ImportController extends Controller
         $file = fopen($file, 'r');
         $failed = array();
         while(!feof($file)){
-            $line = trim(preg_replace('/\s\s+/', ' ', fgets($file)));
+
+            $line = trim(preg_replace('/\s\s+/', ' ', fgets(substr($file,$strLen))));
+            preg_match_all('!\d+!', $line, $matches);
+
+            $amount = implode('', $matches[0]);
+            $strLen = strlen($amount);
+            $line = trim(substr($file,$strLen));
 
             $card = Card::where('name', $line)->first();
             if($card != null){
+
                 $inWishlist = new Inwishlist();
                 $inWishlist->wishlist_id = $wishlist;
                 $inWishlist->card_id = $card->id;
-//            $inWishlist->quantity = $quantity;
+                $inWishlist->quantity = $amount;
                 $inWishlist->save();
 
                 continue;
