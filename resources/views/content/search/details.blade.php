@@ -145,10 +145,10 @@
                                     @if(count($trades) == 0)
                                     @else
                                         <div class="col-md-2" style="display: inline-block;">
-                                            <button type="submit" id="me_button" class="btn btn-success">Add to me</button>
+                                            <button type="submit" id="me_button" class="btn btn-success">Trade Away</button>
                                         </div>
                                         <div class="col-md-2" style="display: inline-block;">
-                                            <button type="submit" id="partner_button" class="btn btn-warning">Add to Partner</button>
+                                            <button type="submit" id="partner_button" class="btn btn-warning">Trade For</button>
                                         </div>
                                     @endif
                                 </div>

@@ -16,7 +16,29 @@
                         </div>
                     @endif
                     <div class="panel-body">
-                        <span>Select a wishlist you would like to import to, or import to a new wishlist</span>
+                        <span>Select a wishlist you would like to import to, or import to a new wishlist</span><br/>
+                        <details class="importDetails">
+                            <summary>Import details</summary>
+                            <table class="table">
+                                <tr>
+                                    <td>Allowed files:</td>
+                                    <td>.csv, .txt</td>
+                                </tr>
+                                <tr>
+                                    <td>csv format:</td>
+                                    <td>Quantity;Card;Set(Optional)</td>
+                                </tr>
+                                <tr>
+                                    <td>txt format:</td>
+                                    <td>1 Lightning Bolt<br/>2 Rift Bolt</td>
+                                </tr>
+                                <tr>
+                                    <td>Max size:</td>
+                                    <td>5MB.</td>
+                                </tr>
+                            </table>
+                        </details>
+
                         <form action="{{ action('ImportController@process') }}" class="search_form" method="post" autocomplete="off" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="row" style="margin-top:20px;">

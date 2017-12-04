@@ -6,9 +6,11 @@ use App\Card;
 use App\Inwishlist;
 use App\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use File;
 
 class ImportController extends Controller
 {
@@ -54,20 +56,33 @@ class ImportController extends Controller
     }
 
     private function csvProcess($file, $wishlist){
-        //TODO: [Joshua] 
+        //TODO: [Joshua]
     }
 
     private function txtProcess($file, $wishlist){
+        $bytes = File::size($file);
+        if($bytes > 3000000){
+            //TODO: [Joshua] Add Error Handling
+            return 'To Big';
+        }
+
         $file = fopen($file, 'r');
         $failed = array();
+        $x = 0;
         while(!feof($file)){
+            $line = trim(preg_replace('/\s\s+/', ' ', fgets($file)));
+            if($file == " "){
+                continue;
+            }
 
-            $line = trim(preg_replace('/\s\s+/', ' ', fgets(substr($file,$strLen))));
             preg_match_all('!\d+!', $line, $matches);
 
             $amount = implode('', $matches[0]);
             $strLen = strlen($amount);
-            $line = trim(substr($file,$strLen));
+            $line = trim(substr($line,$strLen));
+            if($amount == 0){
+                $amount = 1;
+            }
 
             $card = Card::where('name', $line)->first();
             if($card != null){
@@ -81,10 +96,24 @@ class ImportController extends Controller
                 continue;
             }
 
-            $failed = $line;
+            $failed[$x] = $line;
+            $x++;
         }
+
         fclose($file);
 
+        if(count($failed) > 0){
+            //TODO: [Joshua] Return file with failed cards
+            $fileText = '';
+            foreach($failed as $f){
+                $fileText .= $f . '\n';
+            }
+
+            $myName = Wishlist::find($wishlist)->name . "_failed.txt";
+            $headers = ['Content-type' => 'text/plain', 'Content-Disposition' => sprintf('attachment; filename="%s"', $myName), 'Content-Length' => sizeof($fileText)];
+
+            return Response::create($fileText, 200, $headers);
+        }
         return true;
     }
 }

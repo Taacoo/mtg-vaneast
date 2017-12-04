@@ -16,7 +16,6 @@
                         </div>
                     @endif
                     <div class="panel-body">
-
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="{{ action('SearchController@search') }}" class="search_form" method="post" autocomplete="off">
@@ -35,7 +34,7 @@
                                 <div class="result">
                                     @if(isset($result))
                                         @foreach($result as $r)
-                                            <span><a class="searched" data-image="https://magiccardmarket.eu{!! ltrim($r->img_path, '.') !!}" href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->icon_abbr) }}" ></i></a></span></br>
+                                            <span><a class="searched" data-image="https://magiccardmarket.eu{!! ltrim($r->img_path, '.') !!}" href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->icon_abbr) }}" ></i></a></span><span class="subText"> - {{ $r->expansion->name }}</span></spam></br>
                                         @endforeach
                                     @endif
                                 </div>

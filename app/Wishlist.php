@@ -49,10 +49,10 @@ class Wishlist extends Model
             $dailyPrice->daily_trend = $mcm->product->priceGuide->TREND;
             $dailyPrice->save();
 
-            return $mcm->product->priceGuide->AVG;
+            return $mcm->product->priceGuide->TREND;
         }
 
-        return $card->dailyPrice->daily_avg;
+        return $card->dailyPrice->daily_trend;
     }
 
     public static function getTotalCardValue($card_id, $inwishlist_id){

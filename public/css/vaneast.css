@@ -102,3 +102,41 @@ only screen and (min-device-pixel-ratio : 1.5) {
 .hiddenWishlist{
     display: none;
 }
+
+.importDetails{
+    font-family:monospace;
+    width: 50%;
+    font-size:12px;
+}
+
+.importDetails summary{
+    font-size:14px;
+}
+
+.importDetails table{
+    width: 100%;
+}
+
+.subText{
+    color: #9c9c9c;
+    font-size: 12px;
+}
+
+body.dragging, body.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+ol.example li.placeholder {
+    position: relative;
+    /** More li styles **/
+}
+ol.example li.placeholder:before {
+    position: absolute;
+    /** Define arrowhead **/
+}
