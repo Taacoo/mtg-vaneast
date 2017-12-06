@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Input;
 class WishlistController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['wishlistDetails']);
     }
 
     public function index(){
