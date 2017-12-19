@@ -6,8 +6,6 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-
-                    <div class="panel-heading">Import</div>
                     @if(Session::has('message'))
                         <div class="form-group">
                             <div class="alert alert-warning">
@@ -16,6 +14,7 @@
                         </div>
                     @endif
                     <div class="panel-body">
+                        <h3 class="center">Import</h3>
                         <span>Select a wishlist you would like to import to, or import to a new wishlist</span><br/>
                         <details class="importDetails">
                             <summary>Import details</summary>
@@ -73,12 +72,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="submit" value="Import" class="form-control">
+                                        <button type="submit" class="search_button btn btn-custom btn-block">Import</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                        <hr/>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="result">

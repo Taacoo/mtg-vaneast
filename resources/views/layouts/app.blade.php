@@ -70,7 +70,7 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li ><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
                         @else
                             <li style="display: inline-block;" @if($pageid == 'search') class="active" @endif>
                                 <a href="{{ url('search') }}">Search</a>
@@ -127,7 +127,10 @@
     </div>
     <footer class="footer">
         <div class="container">
-            <p class="text-center"><small>Powered by &copy; <a target="_blank" href="https://www.magiccardmarket.eu">Magic Card Market.</a> Created by <a href="{{ url('about-me') }}">Joshua van Oosten</a></small>
+            <p class="text-center">
+                <small>Powered by &copy; <a target="_blank" href="https://www.magiccardmarket.eu">Magic Card Market.</a></small>
+                <small>Design by <a target="_blank" href="https://www.savannevanamstel.com/">Savanne van Amstel</a></small>
+                <small>Created by <a href="{{ url('about-me') }}">Joshua van Oosten</a></small>
         </div>
     </footer>
 

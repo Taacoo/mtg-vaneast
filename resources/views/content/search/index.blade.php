@@ -6,8 +6,6 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-
-                    <div class="panel-heading">Search</div>
                     @if(Session::has('message'))
                         <div class="form-group">
                             <div class="alert alert-warning">
@@ -16,6 +14,8 @@
                         </div>
                     @endif
                     <div class="panel-body">
+                        <h3 class="center">Search</h3>
+                        <br/>
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="{{ action('SearchController@search') }}" class="search_form" method="post" autocomplete="off">
@@ -23,7 +23,7 @@
                                         {{ csrf_field() }}
                                         <input type="text" name="card_search" class="form-control" placeholder="Search..." required/>
                                         </br>
-                                        <button type="submit" class="search_button btn btn-block">Search</button>
+                                        <button type="submit" class="search_button btn btn-custom btn-block">Search</button>
                                     </div>
                                 </form>
                             </div>
@@ -34,7 +34,7 @@
                                 <div class="result">
                                     @if(isset($result))
                                         @foreach($result as $r)
-                                            <span><a class="searched" data-image="https://magiccardmarket.eu{!! ltrim($r->img_path, '.') !!}" href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->icon_abbr) }}" ></i></a></span><span class="subText"> - {{ $r->expansion->name }}</span></spam></br>
+                                            <span><a class="searched link" data-image="https://magiccardmarket.eu{!! ltrim($r->img_path, '.') !!}" href="{{ url('card') . '/'. $r->id}}">{{ $r->name }} <i class="{{ $r->rarity }} ss ss-{{ strtolower($r->expansion->icon_abbr) }}" ></i></a></span><span class="subText"> - {{ $r->expansion->name }}</span></spam></br>
                                         @endforeach
                                     @endif
                                 </div>

@@ -6,8 +6,6 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-
-                    <div class="panel-heading">Wishlist </div>
                     @if(Session::has('message'))
                         <div class="form-group">
                             <div class="alert alert-warning">
@@ -16,13 +14,15 @@
                         </div>
                     @endif
                     <div class="panel-body">
+                        <h3 class="center">Wishlist</h3>
+                        <br/>
                         <form action="{{ action('WishlistController@createWishlist') }}" class="search_form" method="post" autocomplete="off">
                             <div class="form-field">
                                 <div class="input-group">
                                     {{ csrf_field() }}
                                     <input type="text" name="wishlist_name" class="form-control" placeholder="Wishlist..." required/>
                                     <span class="input-group-btn">
-                                        <button type="submit" class="btn">Create Wishlist</button>
+                                        <button type="submit" class="btn btn-custom" style="padding:6px 20px 6px 20px;">Create Wishlist</button>
                                     </span>
                                 </div>
                             </div>

@@ -6,8 +6,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
                 <div class="panel-body">
+                    <h3 class="center">Login</h3>
+                    <br/>
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
@@ -30,6 +31,9 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
+                                <a class="btn btn-link float-right" href="{{ route('password.request') }}">
+                                    Forgot Your Password?
+                                </a>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -51,13 +55,12 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    no account? register here!
+                                </a>
+                                <button type="submit" class="btn btn-custom">
                                     Login
                                 </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
                             </div>
                         </div>
                     </form>

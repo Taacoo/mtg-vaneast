@@ -6,8 +6,6 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-
-                    <div class="panel-heading">Wishlist Details - {{ $wishlist->name }}</div>
                     @if(Session::has('success'))
                         <div class="form-group">
                             <div class="alert alert-success">
@@ -23,6 +21,7 @@
                         </div>
                     @endif
                     <div class="panel-body">
+                        <h3 class="center">Wishlist Details - {{ $wishlist->name }}</h3>
                         <a style="float: left;" class="btn btn-default" href="{{ url('wishlist') }}"><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;Back</a>
                         <br/>
                         <hr/>

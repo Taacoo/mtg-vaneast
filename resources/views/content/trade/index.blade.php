@@ -6,8 +6,6 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-
-                    <div class="panel-heading">Trade </div>
                     @if(Session::has('message'))
                         <div class="form-group">
                             <div class="alert alert-warning">
@@ -16,13 +14,15 @@
                         </div>
                     @endif
                     <div class="panel-body">
+                        <h3 class="center">Trades</h3>
+                        <br/>
                         <form action="{{ action('TradeController@createTrade') }}" class="search_form" method="post" autocomplete="off">
                             <div class="form-field">
                                 <div class="input-group">
                                         {{ csrf_field() }}
                                         <input type="text" name="trade_name" class="form-control" placeholder="Trade..." required/>
                                     <span class="input-group-btn">
-                                        <button type="submit" class="btn">Create Trade</button>
+                                        <button type="submit" class="btn btn-custom" style="padding:6px 20px 6px 20px;">Create Trade</button>
                                     </span>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                     <tbody>
                                         @forelse($trades as $t)
                                             <tr>
-                                                <td><a href="{{ url('trade', $t->id) }}">{{ $t->name }}</a></td>
+                                                <td><a class="link" href="{{ url('trade', $t->id) }}">{{ $t->name }}</a></td>
                                                 <td>{{ count($t->intrades) }}</td>
                                                 <td>{{ Trade::getMyTradeValue($t->id) }}</td>
                                                 <td>{{ Trade::getPartnerTradeValue($t->id) }}</td>
